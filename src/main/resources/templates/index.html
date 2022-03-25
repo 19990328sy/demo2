@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>文件上传</title>
+</head>
+<body>
+<!--表单的enctype属性要设置为multipart/form-data-->
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <table width="600">
+        <tr>
+            <td>上传者</td>
+            <td><input type="text" name="name"/></td>
+        </tr>
+        <tr>
+            <td>上传图片</td>
+            <td><input type="file" name="file"/></td>
+
+        </tr>
+        <tr>
+            <!--设置单元格可横跨的列数。-->
+            <td colspan="2"><input type="submit" value="上传"/></td>
+        </tr>
+    </table>
+
+</form>
+<form action="/uploadFile" method="post" enctype="multipart/form-data">
+    <table width="600">
+        <tr>
+            <td>上传者</td>
+            <td><input type="text" name="name"/></td>
+        </tr>
+        <tr>
+            <td>上传文件</td>
+            <td><input type="file" name="file"/></td>
+
+        </tr>
+        <tr>
+            <!--设置单元格可横跨的列数。-->
+            <td colspan="2"><input type="submit" value="上传"/></td>
+        </tr>
+    </table>
+
+</form>
+<form action="/downloadFile" method="get" enctype="multipart/form-data">
+    <table width="600">
+
+        <tr>
+            <td>下载文件</td>
+            <td><input type="text" name="fileName"/></td>
+        </tr>
+        <tr>
+            <!--设置单元格可横跨的列数。-->
+            <td colspan="2"><input type="submit" value="下载"/></td>
+        </tr>
+    </table>
+
+</form>
+
+<!--表单的enctype属性要设置为multipart/form-data-->
+<form action="/uploadMultipleFiles" method="post" enctype="multipart/form-data">
+    <table width="600">
+        <tr>
+            <td>上传者</td>
+            <td><input type="text" name="name"/></td>
+        </tr>
+        <tr>
+            <td>上传多个文件</td>
+            <td><input type="file" multiple="multiple" name="files"/></td>
+
+        </tr>
+        <tr>
+            <!--设置单元格可横跨的列数。-->
+            <td colspan="2"><input type="submit" value="上传"/></td>
+        </tr>
+    </table>
+
+</form>
+</body>
+</html>

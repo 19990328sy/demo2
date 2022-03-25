@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- <properties resource="jdbc.properties" /> -->
+    <!-- 指定驱动包的位置 绝对位置 -->
+    <classPathEntry
+            location="C:\Users\lenovo\.m2\repository\mysql\mysql-connector-java\8.0.16\mysql-connector-java-8.0.16.jar"/>
+    <context id="default" targetRuntime="MyBatis3">
+        <!--<plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>-->
+        <!-- 生成一对一配置 -->
+        <!-- <plugin type="cc.bandaotixi.plugins.OneToOnePlugin" /> -->
+        <!-- 生成一对多配置 -->
+        <!-- <plugin type="cc.bandaotixi.plugins.OneToManyPlugin" /> -->
+        <!--不生成注解, true=是, false=否-->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!-- 数据库连接的信息, 参数加上nullCatalogMeansCurrent=true解决找不到主键问题-->
+        <jdbcConnection
+                connectionURL="jdbc:mysql://localhost:3306/student?characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;allowPublicKeyRetrieval=true"
+                driverClass="com.mysql.cj.jdbc.Driver" password="123456" userId="root"/>
+        <!-- 生成实体类 -->
+        <javaModelGenerator
+                targetPackage="com.example.demo.model"
+                targetProject="src/main/java"/>
+        <!-- 生成mapper.xml -->
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject="src/main/resources"/>
+        <!-- 生成mapper接口 -->
+        <javaClientGenerator
+                targetPackage="com.example.demo.mapper"
+                targetProject="src/main/java" type="XMLMAPPER"/>
+        <!-- 需要反向生成的表 -->
+        <table tableName="sys_role" domainObjectName="Role"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+
+            <!-- 属性使用驼峰命名法,不带下划线 -->
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="sys_user" domainObjectName="UserR"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+
+            <!-- 属性使用驼峰命名法,不带下划线 -->
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="sys_user_role" domainObjectName="UserRole"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+
+            <!-- 属性使用驼峰命名法,不带下划线 -->
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <!--<table tableName="user1" domainObjectName="User1"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+
+            &lt;!&ndash; 属性使用驼峰命名法,不带下划线 &ndash;&gt;
+            <property name="useActualColumnNames" value="false"/>
+        </table>-->
+
+        <!--<table tableName="student" domainObjectName="stuStudent"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+
+            &lt;!&ndash; 属性使用驼峰命名法,不带下划线 &ndash;&gt;
+            <property name="useActualColumnNames" value="false"/>
+        </table>-->
+
+    </context>
+</generatorConfiguration>
