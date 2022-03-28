@@ -82,11 +82,11 @@
             <version>3.3.0</version>
         </dependency>
         <!--shiro-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring-boot-starter</artifactId>
             <version>1.5.3</version>
-        </dependency>
+        </dependency>-->
         <!--引入Jsp依赖-->
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
@@ -159,11 +159,22 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory><!--所在的目录-->
+                <includes><!--包括目录下的.properties,.xml文件都会扫描到-->
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!-- 如果不添加此节点mybatis的mapper.xml文件都会被漏掉。 -->
 
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
@@ -173,6 +184,7 @@
                     <verbose>true</verbose>
                     <overwrite>true</overwrite>
                 </configuration>
+
             </plugin>
 
 

@@ -2,14 +2,14 @@ package com.example.demo.controller;
 
 import com.example.demo.model.StuStudent;
 import com.example.demo.model.User;
-import com.example.demo.model.Users;
 import com.example.demo.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+
+import javax.sound.midi.Soundbank;
 
 /**
  * @author shaoyu
@@ -38,33 +38,44 @@ public class UserController {
      */
     @ApiOperation("hello的控制方法")
     @GetMapping("/hello2")
-    public Users hello2(String userName) {
-        Users user = new Users ("张三","123");
+    public User hello2(String userName) {
+        User user = new User ("张三","123");
         return user;
     }
 
     @GetMapping("/hello3")
-    public Users hello3(@ApiParam("用户名") Users user) {
+    public User hello3(@ApiParam("用户名") User user) {
         return user;
     }
 
-    public String login(Users user){
+    public String login(User user){
         System.out.println ( StuStudent.class);
         return null;
     }
-    @RequestMapping(value = "/loginO")
-    public String login(User user){
 
-            ModelAndView mv = new ModelAndView();
-            user = userService.get(user);
 
-            if (user != null) {
-                mv.addObject("user", user);
-                return "user";
-            } else {
-                return "login";
-            }
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public User loginO(@RequestParam("name") String name,@RequestParam("password") String password){
+        User u1=userService.login (name, password );
+        if ( u1!=null){
+            System.out.println ("-----------------------查询成功-----------------------");
+            System.out.println ("登录用户:"+u1.getName ());
+            return u1;
         }
+
+        return null;
+    }
+
+    @RequestMapping(value = "/findByUsername",method = RequestMethod.GET)
+    public String findName(@RequestParam("name")String name){
+        User n=userService.findByUsername ( name );
+        if ( n!=null ){
+            System.out.println ("查询的名字:"+n.getName ());
+            return n.getName ();
+        }
+        return null;
+    }
+
 
 
 

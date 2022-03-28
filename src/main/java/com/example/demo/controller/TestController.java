@@ -3,16 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import io.swagger.annotations.Api;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author shaoyu
@@ -44,49 +37,17 @@ public class TestController {
         return name;
     }
 
-
-    @RequestMapping("logout")
-    public String logout() {
-        Subject subject = SecurityUtils.getSubject ();
-        subject.logout ();
-        return "redirect:/login.jsp";
-    }
-
-    @RequestMapping("/login")
-    public String login(String username, String password) {
-        //获取主题对象
-        Subject subject = SecurityUtils.getSubject ();
-        try {
-            subject.login ( new UsernamePasswordToken ( username, password ) );
-            System.out.println ( "登录成功！！！" );
-            return "redirect:/index.jsp";
-        } catch (UnknownAccountException e) {
-            e.printStackTrace ();
-            System.out.println ( "用户错误！！！" );
-        } catch (IncorrectCredentialsException e) {
-            System.out.println ( "密码错误！！！" );
-        }
-        return "redirect:/login.jsp";
+    @ResponseBody
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public String add(@Param ( "user" ) User user){
+       int u= userService.insertUser ( user );
+       if ( u!=0 ){
+           System.out.println ("看到这个就说明添加成功了");
+           return "添加成功";
+       }
+        return "添加失败！";
     }
 
 
-    /***
-     *功能描述
-     * @author shaoyu
-     * @date 2022/3/24
-        * @param user
-     * @return java.lang.String
-     * @Description :用户注册验证
-     */
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(User user) {
-        try {
-            userService.register(user);
-            return "redirect:/login.jsp";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "redirect:/register.jsp";
-        }
-    }
 }
