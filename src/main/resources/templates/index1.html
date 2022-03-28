@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type="text/javascript">
+    function loginCheck() {
+
+        if(loginForm.userName.value == "") {
+            alert("用户名不能为空，请输入用户名！");
+            loginForm.userName.focus();
+            return false;
+        }
+        if(loginForm.userPassword.value == "") {
+            alert("密码不能为空，请输入密码！");
+            loginForm.userPassword.focus();
+            return false;
+        }
+        if(loginForm.verification2.value == "") {
+            alert("验证码不能为空，请输入验证码！");
+            loginForm.verification2.focus();
+            return false;
+        }
+        if(loginForm.verification2.value != loginForm.verification1.value) {
+            alert("验证码错误！");
+            loginForm.verification2.focus();
+            return false;
+        }
+
+        return true;
+
+    }
+</script>
+</head>
+
+<body>
+<form name="loginForm" action="check.jsp" method="post" οnsubmit="return loginCheck();">
+    <table align="center">
+        <tr align="center">
+            <td colspan="2"><h1>欢迎登录</h1></td>
+        </tr>
+        <tr>
+            <td>用户名：</td>
+            <td><input name="name" type="text"/></td>
+        </tr>
+        <tr>
+            <td>密  码：</td>
+            <td><input name="password" type="password"/></td>
+        </tr>
+        <%//获取随机数
+        int num1 = (int)(Math.random() * 10);
+        int num2 = (int)(Math.random() * 10);
+        int num3 = (int)(Math.random() * 10);
+        int num4 = (int)(Math.random() * 10);
+
+        String num = num1 + "" + num2 + num3 + num4;
+
+        %>
+        <span style="color:#339999;background-color: rgb(255, 255, 255);"> <!-- 写一个隐藏域，用来进行验证比较 --></span>
+        <tr>
+            <td><input name="verification1" type="hidden" value="<%=num %>"/></td>
+        </tr>
+        <tr>
+            <td>验证码：</td>
+            <td>
+                <input name="verification2" type="text" style="width: 60px;">
+                <img src="image/<%=num1 %>.png" />
+                <img src="image/<%=num2 %>.png" />
+                <img src="image/<%=num3 %>.png" />
+                <img src="image/<%=num4 %>.png" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="提交">
+                <input type="reset" value="重置">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+<body>
+
+</body>
+</html>
