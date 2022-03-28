@@ -27,8 +27,8 @@ public class DemoApplication {
         SpringApplication.run ( DemoApplication.class, args );
         System.out.println("=========项目启动成功=========");
     }
-    @RequestMapping(value = "/index")
+    @RequestMapping(value = "/index1")
     public String aa(){
-            return "index";
+            return "index1";
     }
 }

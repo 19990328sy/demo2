@@ -55,5 +55,8 @@ public class CaptchaController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
+
+
 }

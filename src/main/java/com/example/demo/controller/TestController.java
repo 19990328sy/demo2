@@ -38,7 +38,7 @@ public class TestController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    @RequestMapping(value = "/add",method = RequestMethod.GET)
     public String add(@Param ( "user" ) User user){
        int u= userService.insertUser ( user );
        if ( u!=0 ){
@@ -47,7 +47,10 @@ public class TestController {
        }
         return "添加失败！";
     }
-
+    @RequestMapping(value = "/loginHtml")
+    public String loginHtml() {
+        return "login";
+    }
 
 
 }
