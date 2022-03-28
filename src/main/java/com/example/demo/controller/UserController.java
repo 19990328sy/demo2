@@ -1,14 +1,13 @@
 package com.example.demo.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpSession;
  * @author shaoyu
  */
 @Api(tags = "用户的实体类")
-@RestController
+@Controller
 
 public class UserController {
 
@@ -59,18 +58,18 @@ public class UserController {
     }*/
 
 
+
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    @ResponseBody
     public String loginO(@RequestParam(value = "name",required = false) String name, @RequestParam(value = "password",required = false) String password, HttpSession session){
         User u1=userService.login (name, password );
         session.setAttribute ( "name",name );
         if ( u1!=null){
             System.out.println ("-----------------------查询成功-----------------------");
             System.out.println ("登录用户:"+u1.getName ());
-            return "success.html";
+            return "/success.html";
         }else {
             System.out.println ("登录失败！请重新登录！");
-            return "error";
+            return "/error.html";
         }
 
 
