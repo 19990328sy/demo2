@@ -20,4 +20,7 @@
     <select id="login" resultType="com.example.demo.model.User">
         select * from user where name =#{name} and password=#{password}
     </select>
+    <insert id="regist" parameterType="com.example.demo.model.User">
+        insert into  user (name,password) values(#{name},#{password})
+    </insert>
 </mapper>

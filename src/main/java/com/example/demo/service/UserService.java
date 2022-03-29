@@ -22,4 +22,5 @@ public interface UserService {
     /**用户注册
      * @return*/
     int insertUser(User  user);
+
 }

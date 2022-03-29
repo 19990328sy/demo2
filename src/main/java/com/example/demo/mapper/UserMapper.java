@@ -2,7 +2,6 @@ package com.example.demo.mapper;
 
 import com.example.demo.model.User;
 import org.apache.ibatis.annotations.Insert;
-import org.springframework.stereotype.Service;
 
 public interface UserMapper {
 

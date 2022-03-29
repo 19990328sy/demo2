@@ -129,7 +129,7 @@ public class FileController {
      * @author shaoyu
      * @date 2022/3/23
      * @return
-     * @Description :用于上传视频
+     * @Description :用于上传视频或者图片
      */
     @ResponseBody
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
@@ -140,7 +140,7 @@ public class FileController {
         try {
             String originalFilename = file.getOriginalFilename ();
             //用于判断上传的是否是jpg、mp4、ppt格式的文件
-            /*int start = originalFilename.lastIndexOf(".");
+            int start = originalFilename.lastIndexOf(".");
             int length = originalFilename.length ();
             String finalType = originalFilename.substring(start,length);
             String path=".jpg,.mp4,.ppt";
@@ -149,15 +149,15 @@ public class FileController {
             if(resultList.indexOf (finalType)<0){
                 return "不是jpg、mp4、ppt格式的文件。。。";
             }
-            String fileName = originalFilename.substring(0,start);*/
+            String fileName = originalFilename.substring(0,start);
 
             byte[] bytes = file.getBytes ();//将文件转为byte
             String videoPath = System.getProperty("user.dir");//获取项目运行的路径（好像是tomcat下的bin目录）
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmssSS");//设置时间戳格式
             Date date = new Date();
             String filename = simpleDateFormat.format(date);//将时间戳转为String存储  防止文件名字重复
-            videoPath ="D:/aplus/" +filename;//设置完整路径以及文件名（因为之前get到的在bin目录下，所以要返回上一层目录才能到达webapp目录）
-            // videoPath ="D:/aplus/" +fileName+filename+finalType;//这个是为了获取上传的文件格式  设置完整路径以及文件名（因为之前get到的在bin目录下，所以要返回上一层目录才能到达webapp目录）
+            //videoPath ="D:/aplus/" +filename;//设置完整路径以及文件名（因为之前get到的在bin目录下，所以要返回上一层目录才能到达webapp目录）
+             videoPath ="D:/aplus/" +fileName+filename+finalType;//这个是为了获取上传的文件格式  设置完整路径以及文件名（因为之前get到的在bin目录下，所以要返回上一层目录才能到达webapp目录）
             System.out.println (videoPath);
             OutputStream outputStream=new FileOutputStream ( videoPath );
             outputStream.write ( bytes );

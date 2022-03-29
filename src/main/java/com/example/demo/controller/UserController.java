@@ -6,10 +6,12 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.Name;
 import javax.servlet.http.HttpSession;
 
 
@@ -75,8 +77,17 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "/findByUsername",method = RequestMethod.POST)
+    /***
+     *功能描述
+     * @author shaoyu
+     * @date 2022/3/28
+        * @param name
+     * @return java.lang.String
+     * @Description :根据用户名字查询
+     */
 
+    @ResponseBody
+    @RequestMapping(value = "/findByUsername",method = RequestMethod.POST)
     public String findName(@RequestParam("name")String name){
         User n=userService.findByUsername ( name );
         if ( n!=null ){
@@ -85,6 +96,17 @@ public class UserController {
         }
         return null;
     }
+
+    @RequestMapping(value = "/regist",method = RequestMethod.GET)
+    public String add(@Param("user") User user){
+        int n=userService.insertUser (user);
+        if ( n>0){
+            System.out.println ("用户注册成功！亲跳转登录页面");
+            return "/regist.html";
+        }
+        return "请重新注册，用户注册不成功！";
+    }
+
 
 
 
