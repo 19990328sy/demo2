@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import ch.qos.logback.core.joran.action.ActionConst;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
@@ -7,12 +8,19 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.ibatis.annotations.Param;
+import org.apache.taglibs.standard.lang.jstl.EnumeratedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.naming.Name;
 import javax.servlet.http.HttpSession;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static javax.swing.UIManager.put;
 
 
 /**
@@ -62,8 +70,13 @@ public class UserController {
 
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String loginO(@RequestParam(value = "name",required = false) String name, @RequestParam(value = "password",required = false) String password, HttpSession session){
+    public String loginO(@RequestParam(value = "name",required = false) String name, @RequestParam(value = "password",required = false) String password,@RequestParam(value = "captcha",required = false) String yanzhengma, HttpSession session){
         User u1=userService.login (name, password );
+        System.out.println ("验证码为000："+session.getAttribute ( "captcha" ));
+        if(!session.getAttribute ( "captcha" ).equals ( yanzhengma )){
+            System.out.println ("验证码错误！请重新输入！");
+            return "/index.html";
+        }
         session.setAttribute ( "name",name );
         if ( u1!=null){
             System.out.println ("-----------------------查询成功-----------------------");
@@ -73,8 +86,6 @@ public class UserController {
             System.out.println ("登录失败！请重新登录！");
             return "/error.html";
         }
-
-
     }
 
     /***
@@ -98,11 +109,11 @@ public class UserController {
     }
 
     @RequestMapping(value = "/regist",method = RequestMethod.GET)
-    public String add(@Param("user") User user){
+    public String add(@Param("user")User user,@RequestParam("name")String name,@RequestParam("password")String password){
         int n=userService.insertUser (user);
         if ( n>0){
             System.out.println ("用户注册成功！亲跳转登录页面");
-            return "/regist.html";
+            return "/login.html";
         }
         return "请重新注册，用户注册不成功！";
     }

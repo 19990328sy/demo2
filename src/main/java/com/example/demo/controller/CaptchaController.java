@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.mapper.UserMapper;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.imageio.ImageIO;
+import javax.naming.Name;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +18,7 @@ import java.io.IOException;
  *功能描述
  * @author shaoyu
  * @date 2022/3/23
-    * @param null
+    * @param
  * @return
  * @Description :
  */
@@ -26,6 +28,9 @@ public class CaptchaController {
 
     @Autowired
     private DefaultKaptcha defaultKaptcha;
+
+    @Autowired
+    private UserMapper userMapper;
 
     /*--------------获取验证码-------------*/
     @GetMapping(value = "/captcha", produces = "image/jpeg")
@@ -40,7 +45,13 @@ public class CaptchaController {
         // 响应返回的是image/jpeg类型
         response.setContentType("image/jpeg");
 
+        /*------------------做一个登录判断，只有登录的时候才能获取验证码-------------------*/
+        /*String name="22";
+        String password="222";
+        User n=userMapper.login (name,password);
+        if ( n!=null){
 
+        }*/
         /*--------------生成验证码-------------*/
         String text = defaultKaptcha.createText();  // 获取验证码文本内容
         System.out.println("验证码为" + text);
@@ -55,6 +66,7 @@ public class CaptchaController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
     }
 
