@@ -1,11 +1,11 @@
 package com.example.demo.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.mapper.StudentSMapper;
 import com.example.demo.model.StuStudent;
 import com.example.demo.service.StudentService;
-import com.example.demo.util.PageData;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.example.demo.util.CommonResult;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,29 +21,21 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentSMapper studentMapper;
 
-    @Override
-    public List<StuStudent> findAge(Integer id) {
 
-        return studentMapper.findAge ( id );
+    @Override
+    public String selectByStudent(StuStudent stuStudent) {
+        StuStudent s=new StuStudent ();
+        if ( s!=null ){
+            return JSONObject.toJSONString ( new CommonResult ().success ( "查询成功！" ) );
+        }
+        return JSONObject.toJSONString ( new CommonResult ().failed () );
     }
 
     @Override
     public List<StuStudent> findAllStudent(StuStudent student) {
-        return studentMapper.findAllStudent (student);
+        return studentMapper.findAllStudent ( student );
     }
 
-    @Override
-    public PageInfo<PageData> findAllStudent1(StuStudent student,Integer page,Integer limit) {
-        PageHelper.startPage (page,limit);
-        List<PageData> list=studentMapper.findAllStudent1 (student);
-        if (list !=null && list.isEmpty ()){
-            /*PageInfo<PageData> pg = new PageInfo<>( list);
-            return pg;*/
-            PageInfo<PageData> pg =new PageInfo<> (list);
-            return pg;
-        }
-        return null;
-    }
 
     @Override
     public int insert(StuStudent record) {
@@ -67,8 +59,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public int deleteByPrimaryKey(Integer id) {
-        return studentMapper.deleteByPrimaryKey ( id );
+    public String deleteByPrimaryKey(Integer id) {
+        int m=studentMapper.deleteByPrimaryKey ( id);
+        if ( m>0){
+            return "删除成功";
+        }
+        return "删除失败";
     }
 
     @Override
@@ -80,6 +76,17 @@ public class StudentServiceImpl implements StudentService {
     public int update(StuStudent student) {
         return studentMapper.update ( student );
     }
+
+    @Override
+    public int countStudent(int id) {
+        int count=studentMapper.countStudent ( id );
+        System.out.println ("学生总数"+count);
+        return studentMapper.countStudent ( id );
+    }
+
+
+
+
 
 
 }

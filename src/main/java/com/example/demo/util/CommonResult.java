@@ -93,8 +93,9 @@ public class CommonResult{
 
     /**
      * 返回分页成功数据
+     * @param pageInfo
      */
-    public CommonResult pageSuccess(PageInfo pageInfo) {
+    public CommonResult pageSuccess(PageInfo<PageData> pageInfo) {
 
         this.code = SUCCESS;
         this.pageNum = pageInfo.getPageNum();

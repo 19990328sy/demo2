@@ -1,17 +1,10 @@
 package com.example.demo.util;
 
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
-/***
- *功能描述
- * @author shaoyu
- * @date 2022/3/23
-    * @param null
- * @return
- * @Description :
- */
 
-public class PageData extends HashMap implements Map {
+public class PageData extends HashMap implements Map{
 
     private static final long serialVersionUID = 1L;
 
@@ -125,4 +118,5 @@ public class PageData extends HashMap implements Map {
         // TODO Auto-generated method stub
         return map.values();
     }
+
 }

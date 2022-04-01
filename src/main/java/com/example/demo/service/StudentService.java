@@ -1,8 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.model.StuStudent;
-import com.example.demo.util.PageData;
-import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,29 +19,12 @@ public interface StudentService {
      * @return java.util.List<com.example.demo.model.StuStudent>
      * @Description :
      */
-    List<StuStudent> findAge(Integer id);
+    String selectByStudent(StuStudent stuStudent);
 
-    /***
-     *功能描述
-     * @author shaoyu
-     * @date 2022/3/23
-        * @param student
-     * @return java.util.List<com.example.demo.model.StuStudent>
-     * @Description :
-     */
     List<StuStudent> findAllStudent(StuStudent student);
 
-    /***
-     *功能描述
-     * @author shaoyu
-     * @date 2022/3/23
-        * @param student
-     * @param page
-     * @param limit
-     * @return com.github.pagehelper.PageInfo<com.example.demo.util.PageData>
-     * @Description :
-     */
-    PageInfo<PageData> findAllStudent1(StuStudent student,Integer page,Integer limit);
+
+
 
     /***
      *功能描述
@@ -93,7 +74,7 @@ public interface StudentService {
      * @return int
      * @Description :
      */
-    int deleteByPrimaryKey(Integer id);
+    String deleteByPrimaryKey(Integer id);
 
     /***
      *功能描述
@@ -114,5 +95,18 @@ public interface StudentService {
      * @Description :
      */
     int update(StuStudent student);
+
+    /***
+     *功能描述
+     * @author shaoyu
+     * @date 2022/3/31
+        * @param id
+     * @return int
+     * @Description :
+     */
+
+    int countStudent(int id);
+
+
 
 }

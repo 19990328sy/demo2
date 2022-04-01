@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.models.auth.In;
 
 /**
  * @author lenovo
@@ -21,6 +22,25 @@ public class StuStudent {
     private String address;
     @ApiModelProperty("学生电话")
     private String telphone;
+    //分页
+    /*private Integer page;
+    private Integer limit;*/
+
+    /*public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
+    }*/
 
     public Integer getId() {
         return id;
@@ -69,4 +89,5 @@ public class StuStudent {
     public void setTelphone(String telphone) {
         this.telphone = telphone;
     }
+
 }

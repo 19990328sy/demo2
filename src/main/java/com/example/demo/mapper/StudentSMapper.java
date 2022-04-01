@@ -104,7 +104,7 @@ public interface StudentSMapper {
      * @Description :
      */
     @Select ( "select * from student" )
-    public List<StuStudent> findAllStudent(StuStudent student);
+     List<StuStudent> findAllStudent(StuStudent student);
 
     /***
      *功能描述
@@ -116,6 +116,7 @@ public interface StudentSMapper {
      */
     List<PageData> findAllStudent1(@Param ("student")StuStudent student);
 
+
     /**
      *功能描述
      * @author shaoyu
@@ -126,16 +127,17 @@ public interface StudentSMapper {
      */
     int update(StuStudent student);
 
-    /***
-     *功能描述
-     * @author shaoyu
-     * @date 2022/3/23
-        * @param student
-     * @param page
-     * @param limit
-     * @return com.github.pagehelper.PageInfo<com.example.demo.util.PageData>
-     * @Description :
-     */
-    PageInfo<PageData> findAllStudent1(StuStudent student,Integer page,Integer limit);
+   /***
+    *功能描述
+    * @author shaoyu
+    * @date 2022/3/31
+       * @param id
+    * @return int
+    * @Description :记总数
+    */
+    int countStudent(int id);
+
+    //模糊查询
+    StuStudent selectByStudent(StuStudent stuStudent);
 
 }

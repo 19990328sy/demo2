@@ -90,7 +90,7 @@
       locked = #{locked,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="findAll" parameterType="com.example.demo.model.easUser">
+  <select id="findAll" parameterType="com.example.demo.model.easUser" resultType="Map">
     select * from eas_user;
   </select>
 </mapper>

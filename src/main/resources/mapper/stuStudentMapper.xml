@@ -120,8 +120,12 @@
       telphone = #{telphone,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="findAll" parameterType="com.example.demo.model.StuStudent">
-    select * from student
+
+  <select id="countStudent" resultType="int">
+    select count(*) from student
   </select>
 
+  <select id="selectByStudent" parameterType="com.example.demo.model.StuStudent">
+    select  from student;
+  </select>
 </mapper>

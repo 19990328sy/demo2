@@ -1,15 +1,13 @@
 package com.example.demo.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.example.demo.model.StuStudent;
 import com.example.demo.service.StudentService;
-import com.example.demo.util.CommonResult;
-import com.example.demo.util.PageData;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -26,18 +24,26 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-
-    @ResponseBody
-    @RequestMapping(value ="/findAll",method = RequestMethod.POST)
-    public String findAllStudent(StuStudent student,@RequestParam(defaultValue ="1")Integer page,@RequestParam(defaultValue ="10")Integer limit){
-
-        PageInfo<PageData> pageInfo = studentService.findAllStudent1 (student,page,limit);
-        if (pageInfo!=null){
-            System.out.println (student.getSex ()+ student.getTelphone ()+student.getAddress ()+student.getSex ()+student.getPassword ()+student.getStuname ());
-            return JSONObject.toJSONString ( new CommonResult ().pageSuccess ( pageInfo ) );
+    @RequestMapping(value = "findAll")
+    public PageInfo<StuStudent> findAll(StuStudent stuStudent,@RequestParam(required = false) Integer page,@RequestParam(required = false) Integer limit){
+        PageHelper.startPage (page,limit);
+        HashMap<Object, Object> map = new HashMap<> ();
+        map.put ("stuStudent",stuStudent);
+        List<StuStudent> list=studentService.findAllStudent ( stuStudent );
+        if ( list!=null ){
+            //System.out.println ("查询出来的数据是"+"第"+stuStudent.getPage ()+"页"+"  "+"总"+stuStudent.getLimit ()+"条");
+            PageInfo<StuStudent> pageInfo=new PageInfo<> (list);
+            System.out.println ("----------------------查询成功------------------");
+            return  pageInfo;
         }
-        return JSONObject.toJSONString ( new CommonResult ().failed () );
+        return null;
     }
+
+    @PostMapping("selectByStudent")
+    public String selectByStudent(StuStudent stuStudent,@RequestParam(required = false)String stuname,@RequestParam(required = false)String address,@RequestParam(required = false)int age){
+        return studentService.selectByStudent ( stuStudent );
+    }
+
 
     @ResponseBody
     @RequestMapping(value = "add",method = RequestMethod.POST)//这个方法没有问题 怎么在postman上运行
@@ -78,4 +84,15 @@ public class StudentController {
         }
         return "修改失败！";
     }
+
+    @PostMapping("count")
+    public int countStudent(int id){
+        return studentService.countStudent ( id );
+    }
+
+    @RequestMapping("deleteByPrimaryKey")
+    public String del(int id){
+        return studentService.deleteByPrimaryKey ( id );
+    }
+
 }
