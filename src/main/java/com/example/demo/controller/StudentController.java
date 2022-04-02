@@ -7,6 +7,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
+import javax.sound.midi.Soundbank;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @RequestMapping(value = "findAll")
+    @RequestMapping(value = "findAll",method = RequestMethod.POST)
     public PageInfo<StuStudent> findAll(StuStudent stuStudent,@RequestParam(required = false) Integer page,@RequestParam(required = false) Integer limit){
         PageHelper.startPage (page,limit);
         HashMap<Object, Object> map = new HashMap<> ();
@@ -40,8 +41,17 @@ public class StudentController {
     }
 
     @PostMapping("selectByStudent")
-    public String selectByStudent(StuStudent stuStudent,@RequestParam(required = false)String stuname,@RequestParam(required = false)String address,@RequestParam(required = false)int age){
-        return studentService.selectByStudent ( stuStudent );
+    public StuStudent selectByStudent(StuStudent stuStudent, @RequestParam(required = false)String stuname, @RequestParam(required = false)String address){
+        StuStudent s=studentService.selectByStudent ( stuStudent );
+        if ( s.getStuname ()!=null && s.getId ()!=null ){
+            return stuStudent;
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "selectConfigById",method = RequestMethod.POST)
+    public StuStudent findById(@RequestParam("id") Integer id){
+        return (StuStudent) studentService.selectByPrimaryKey ( id );
     }
 
 
@@ -90,8 +100,9 @@ public class StudentController {
         return studentService.countStudent ( id );
     }
 
-    @RequestMapping("deleteByPrimaryKey")
+    @RequestMapping(value = "deleteByPrimaryKey",method = RequestMethod.POST)
     public String del(int id){
+        System.out.println ("删除成功！！！");
         return studentService.deleteByPrimaryKey ( id );
     }
 

@@ -5,7 +5,6 @@ import com.example.demo.mapper.StudentSMapper;
 import com.example.demo.model.StuStudent;
 import com.example.demo.service.StudentService;
 import com.example.demo.util.CommonResult;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,12 +22,12 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Override
-    public String selectByStudent(StuStudent stuStudent) {
-        StuStudent s=new StuStudent ();
-        if ( s!=null ){
-            return JSONObject.toJSONString ( new CommonResult ().success ( "查询成功！" ) );
+    public StuStudent selectByStudent(StuStudent stuStudent) {
+        StuStudent s=studentMapper.selectByStudent ( stuStudent );
+        if ( s!=null ) {
+            return s;
         }
-        return JSONObject.toJSONString ( new CommonResult ().failed () );
+        return null;
     }
 
     @Override
@@ -44,7 +43,12 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StuStudent selectByPrimaryKey(Integer id) {
-        return studentMapper.selectByPrimaryKey ( id );
+        StuStudent s=new StuStudent ();
+        s.setId ( id );
+        if ( id!=null){
+            return studentMapper.selectByPrimaryKey ( id );
+        }
+        return null;
     }
 
     @Override
@@ -83,10 +87,5 @@ public class StudentServiceImpl implements StudentService {
         System.out.println ("学生总数"+count);
         return studentMapper.countStudent ( id );
     }
-
-
-
-
-
 
 }

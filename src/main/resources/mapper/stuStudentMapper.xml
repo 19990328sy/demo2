@@ -125,7 +125,7 @@
     select count(*) from student
   </select>
 
-  <select id="selectByStudent" parameterType="com.example.demo.model.StuStudent">
-    select  from student;
+  <select id="selectByStudent" parameterType="com.example.demo.model.StuStudent" resultType="List">
+    select * from student where stuname=#{stuname};
   </select>
 </mapper>

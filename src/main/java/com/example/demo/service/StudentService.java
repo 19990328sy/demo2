@@ -19,7 +19,7 @@ public interface StudentService {
      * @return java.util.List<com.example.demo.model.StuStudent>
      * @Description :
      */
-    String selectByStudent(StuStudent stuStudent);
+    StuStudent selectByStudent(StuStudent stuStudent);
 
     List<StuStudent> findAllStudent(StuStudent student);
 
@@ -44,7 +44,7 @@ public interface StudentService {
      * @return com.example.demo.model.StuStudent
      * @Description :
      */
-    StuStudent selectByPrimaryKey(Integer id);
+    Object selectByPrimaryKey(Integer id);
 
     /***
      *功能描述
