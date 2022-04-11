@@ -33,15 +33,23 @@
                 targetPackage="com.example.demo.mapper"
                 targetProject="src/main/java" type="XMLMAPPER"/>
         <!-- 需要反向生成的表 -->
-        <table tableName="role" domainObjectName="Role"
+        <!--<table tableName="role" domainObjectName="Role"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
 
-            <!-- 属性使用驼峰命名法,不带下划线 -->
+            &lt;!&ndash; 属性使用驼峰命名法,不带下划线 &ndash;&gt;
             <property name="useActualColumnNames" value="false"/>
         </table>
-        <!--<table tableName="sys_user" domainObjectName="UserR"
+        &lt;!&ndash;<table tableName="sys_user" domainObjectName="UserR"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+
+            &lt;!&ndash; 属性使用驼峰命名法,不带下划线 &ndash;&gt;
+            <property name="useActualColumnNames" value="false"/>
+        </table>&ndash;&gt;
+        <table tableName="user_role" domainObjectName="UserRole"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
@@ -49,7 +57,7 @@
             &lt;!&ndash; 属性使用驼峰命名法,不带下划线 &ndash;&gt;
             <property name="useActualColumnNames" value="false"/>
         </table>-->
-        <table tableName="user_role" domainObjectName="UserRole"
+        <table tableName="industrial_value_add" domainObjectName="INdustrialValueAdd"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
