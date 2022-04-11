@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.INdustrialValueAddMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.model.INdustrialValueAdd" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="STAT_YEAR" property="statYear" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="INSERT_TIME" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="VALUE_ADD" property="valueAdd" jdbcType="VARCHAR" />
+    <result column="VALUE_RATE" property="valueRate" jdbcType="VARCHAR" />
+    <result column="SCALE_VALUE_ADD" property="scaleValueAdd" jdbcType="VARCHAR" />
+    <result column="SCALE_VALUE_RATE" property="scaleValueRate" jdbcType="VARCHAR" />
+    <result column="PROVINCES_RATE" property="provincesRate" jdbcType="VARCHAR" />
+    <result column="COUNTRY_RATE" property="countryRate" jdbcType="VARCHAR" />
+    <result column="org_no" property="orgNo" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID,STAT_YEAR,STATUS,INSERT_TIME,VALUE_ADD,VALUE_RATE,SCALE_VALUE_ADD,SCALE_VALUE_RATE,PROVINCES_RATE,COUNTRY_RATE,org_no
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Collumn_List" />
+    from industrial_value_add
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from industrial_value_add
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.INdustrialValueAdd" >
+    insert into industrial_value_add (ID, STAT_YEAR, STATUS, 
+      INSERT_TIME, VALUE_ADD, VALUE_RATE, 
+      SCALE_VALUE_ADD, SCALE_VALUE_RATE, PROVINCES_RATE, 
+      COUNTRY_RATE, org_no)
+    values (#{id,jdbcType=INTEGER}, #{statYear,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{insertTime,jdbcType=TIMESTAMP}, #{valueAdd,jdbcType=VARCHAR}, #{valueRate,jdbcType=VARCHAR}, 
+      #{scaleValueAdd,jdbcType=VARCHAR}, #{scaleValueRate,jdbcType=VARCHAR}, #{provincesRate,jdbcType=VARCHAR}, 
+      #{countryRate,jdbcType=VARCHAR}, #{orgNo,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.INdustrialValueAdd" >
+    insert into industrial_value_add
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="statYear != null" >
+        STAT_YEAR,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="insertTime != null" >
+        INSERT_TIME,
+      </if>
+      <if test="valueAdd != null" >
+        VALUE_ADD,
+      </if>
+      <if test="valueRate != null" >
+        VALUE_RATE,
+      </if>
+      <if test="scaleValueAdd != null" >
+        SCALE_VALUE_ADD,
+      </if>
+      <if test="scaleValueRate != null" >
+        SCALE_VALUE_RATE,
+      </if>
+      <if test="provincesRate != null" >
+        PROVINCES_RATE,
+      </if>
+      <if test="countryRate != null" >
+        COUNTRY_RATE,
+      </if>
+      <if test="orgNo != null" >
+        org_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="statYear != null" >
+        #{statYear,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="valueAdd != null" >
+        #{valueAdd,jdbcType=VARCHAR},
+      </if>
+      <if test="valueRate != null" >
+        #{valueRate,jdbcType=VARCHAR},
+      </if>
+      <if test="scaleValueAdd != null" >
+        #{scaleValueAdd,jdbcType=VARCHAR},
+      </if>
+      <if test="scaleValueRate != null" >
+        #{scaleValueRate,jdbcType=VARCHAR},
+      </if>
+      <if test="provincesRate != null" >
+        #{provincesRate,jdbcType=VARCHAR},
+      </if>
+      <if test="countryRate != null" >
+        #{countryRate,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNo != null" >
+        #{orgNo,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.INdustrialValueAdd" >
+    update industrial_value_add
+    <set >
+      <if test="statYear != null" >
+        STAT_YEAR = #{statYear,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="insertTime != null" >
+        INSERT_TIME = #{insertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="valueAdd != null" >
+        VALUE_ADD = #{valueAdd,jdbcType=VARCHAR},
+      </if>
+      <if test="valueRate != null" >
+        VALUE_RATE = #{valueRate,jdbcType=VARCHAR},
+      </if>
+      <if test="scaleValueAdd != null" >
+        SCALE_VALUE_ADD = #{scaleValueAdd,jdbcType=VARCHAR},
+      </if>
+      <if test="scaleValueRate != null" >
+        SCALE_VALUE_RATE = #{scaleValueRate,jdbcType=VARCHAR},
+      </if>
+      <if test="provincesRate != null" >
+        PROVINCES_RATE = #{provincesRate,jdbcType=VARCHAR},
+      </if>
+      <if test="countryRate != null" >
+        COUNTRY_RATE = #{countryRate,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNo != null" >
+        org_no = #{orgNo,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.INdustrialValueAdd" >
+    update industrial_value_add
+    set STAT_YEAR = #{statYear,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      INSERT_TIME = #{insertTime,jdbcType=TIMESTAMP},
+      VALUE_ADD = #{valueAdd,jdbcType=VARCHAR},
+      VALUE_RATE = #{valueRate,jdbcType=VARCHAR},
+      SCALE_VALUE_ADD = #{scaleValueAdd,jdbcType=VARCHAR},
+      SCALE_VALUE_RATE = #{scaleValueRate,jdbcType=VARCHAR},
+      PROVINCES_RATE = #{provincesRate,jdbcType=VARCHAR},
+      COUNTRY_RATE = #{countryRate,jdbcType=VARCHAR},
+      org_no = #{orgNo,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectDust" parameterType="com.example.demo.model.INdustrialValueAdd" resultMap="BaseResultMap">
+    <include refid="Base_Column_List"/>
+    <where>
+      STATUS=2
+      <if test="startTime != null and startTime !='' ">
+        AND STAT_YEAR >= #{startTime}
+      </if>
+      <if test="endTime != null and endTime !='' ">
+        AND #{endTime} >= STAT_YEAR
+      </if>
+    </where>
+    order by STAT_YEAR
+  </select>
+</mapper>
